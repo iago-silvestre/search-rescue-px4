@@ -1,0 +1,95 @@
+# Use Ubuntu 20.04 as base image
+FROM ubuntu:20.04
+
+# Set noninteractive mode for apt
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update package list and install necessary dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    wget \
+    lsb-release \
+    sudo \
+    curl \
+    unzip \
+    build-essential \
+    cmake \
+    ninja-build \
+    protobuf-compiler \
+    libeigen3-dev \
+    libgstreamer1.0-dev \
+    libgstreamer-plugins-base1.0-dev \
+    libgazebo11-dev \
+    libopencv-dev \
+    libprotobuf-dev \
+    libprotoc-dev \
+    python3-pip \
+    python3-rosdep \
+    python3-rosinstall \
+    python3-rosinstall-generator \
+    python3-wstool \
+    python3-catkin-tools \
+    ros-noetic-catkin \
+    ros-noetic-rosbridge-suite \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install ROS Noetic
+RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' \
+    && curl -sSL 'http://packages.ros.org/ros.key' | apt-key add - \
+    && apt-get update \
+    && apt-get install -y ros-noetic-desktop-full \
+    && rosdep init \
+    && rosdep update \
+    && echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+
+# Install MAVROS and dependencies
+RUN apt-get update && apt-get install -y \
+    ros-noetic-mavros \
+    ros-noetic-mavros-extras \
+    ros-noetic-geographic-msgs \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install GeographicLib datasets for MAVROS
+RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh \
+    && chmod +x install_geographiclib_datasets.sh \
+    && ./install_geographiclib_datasets.sh
+
+# Install Java 21 (JDK)
+RUN apt-get update && apt-get install -y openjdk-21-jdk \
+    && echo "export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64" >> ~/.bashrc \
+    && echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> ~/.bashrc
+
+# Clone and setup PX4-Autopilot
+RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot && \
+    cd ~/PX4-Autopilot && \
+    bash ./Tools/setup/ubuntu.sh
+
+# Create catkin workspace and clone search-rescue-px4
+RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
+    git clone https://github.com/iago-silvestre/search-rescue-px4.git
+
+# Build catkin workspace
+WORKDIR /root/catkin_ws
+RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
+
+# Install Jason BDI
+WORKDIR /root
+RUN git clone https://github.com/jason-lang/jason.git ~/jason && \
+    cd ~/jason && \
+    ./gradlew config
+
+# Update bashrc with required environment variables
+RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
+    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc && \
+    echo "source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot ~/PX4-Autopilot/build/px4_sitl_default" >> ~/.bashrc && \
+    echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot" >> ~/.bashrc && \
+    echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/simulation/gazebo-classic/sitl_gazebo-classic" >> ~/.bashrc && \
+    echo "export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc && \
+    echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
+    echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
+    echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc
+
+# Set working directory and source environment at container startup
+WORKDIR /root
+ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && exec bash"]
+
