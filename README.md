@@ -109,6 +109,21 @@ cd ~/catkin_ws
 source /opt/ros/noetic/setup.bash
 catkin_make
 ```
+---
+## **Installation Setup (With Docker)**
+Start by cloning this git repo
+```bash
+git clone https://github.com/iago-silvestre/search-rescue-px4.git
+cd search-rescue-px4
+```
+Build the Docker image
+```bash
+docker build -t px4_ros_noetic_java_rosbridge .
+```
+And to run the container with all the necessary tools installed.
+```bash
+docker run -it --rm --privileged px4_ros_noetic_java_rosbridge
+```
 
 ---
 
