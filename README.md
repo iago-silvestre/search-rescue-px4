@@ -128,8 +128,12 @@ docker run -it --rm --privileged px4_ros_noetic_java_rosbridge
 ---
 
 ## **How to Use the Setup**
+Start by running the Gazebo Simulation and spawning the PX4 UAVs
+```bash
+roslaunch search-rescue-px4 multi_uav_mavros_sitl.launch 
+```
 
-*(To be filled in later)*
+*(More Instructions to be filled in later)*
 
 ---
 
