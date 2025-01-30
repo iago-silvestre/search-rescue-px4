@@ -126,17 +126,6 @@ docker run -it --rm --privileged px4_ros_noetic_java_rosbridge
 ```
 
 ---
-
-## **How to Use the Setup**
-Start by running the Gazebo Simulation and spawning the PX4 UAVs
-```bash
-roslaunch search-rescue-px4 multi_uav_mavros_sitl.launch 
-```
-
-*(More Instructions to be filled in later)*
-
----
-
 ## **Environment Variables**
 
 The following environment variables are set in your `~/.bashrc` for the project to work:
@@ -155,6 +144,17 @@ source ~/.bashrc
 These variables are sourced automatically when you start a new shell.
 
 ---
+## **How to Use the Setup**
+Start by running the Gazebo Simulation and spawning the PX4 UAVs
+```bash
+roslaunch search-rescue-px4 multi_uav_mavros_sitl.launch 
+```
+
+*(More Instructions to be filled in later)*
+
+---
+
+
 
 ## **Acknowledgments**
 
