@@ -1,0 +1,15 @@
+<launch>
+  <arg name="fcu_url" default="udp://:14551@:14555"/>
+
+  <include file="$(find mavros)/launch/apm.launch">
+    <arg name="fcu_url" value="$(arg fcu_url)"/>
+  </include>
+
+  <node name="jason_hw_bridge" pkg="jason_ros" type="hw_bridge.py"
+    args="-a $(find active-perception-experiments)/config/actions_manifest
+    -p $(find active-perception-experiments)/config/perceptions_manifest"/>
+
+  <node name="jason_agent" pkg="jason_ros" type="gradle_starter.sh"
+    args="$(find active-perception-experiments)/src/ardupilot/uav_ap/build.gradle"/>
+
+</launch>

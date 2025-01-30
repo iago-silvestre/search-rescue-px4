@@ -1,0 +1,10 @@
+MAS uav_ap {
+
+    infrastructure: Centralised
+
+    agents: rescuer agentArchClass jasonros.RosArch;
+
+    /* directives: apply_ap = active_perception.Directive2; */
+    directives: apply_ap = active_perception.Directive3;
+    aslSourcePath: "src/asl";
+}
