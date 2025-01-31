@@ -133,7 +133,7 @@ catkin_make
 1. **Install VCXsrv** from [here](https://github.com/marchaesen/vcxsrv) and start it with XLaunch using default settings.
    
 2. **Set the DISPLAY environment**:
-   - Set the `DISPLAY` to point to the host machine’s X11 server:
+Set the `DISPLAY` to point to the host machine’s X11 server:
      ```bash
      set DISPLAY=host.docker.internal:0
      ```
