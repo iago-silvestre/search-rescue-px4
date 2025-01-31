@@ -1,5 +1,5 @@
 # Use Ubuntu 20.04 as base image
-FROM ubuntu:20.04
+FROM osrf/ros:noetic-desktop-full
 
 # Set noninteractive mode for apt
 ENV DEBIAN_FRONTEND=noninteractive
@@ -19,28 +19,19 @@ RUN apt-get update && apt-get install -y \
     libeigen3-dev \
     libgstreamer1.0-dev \
     libgstreamer-plugins-base1.0-dev \
-    libgazebo11-dev \
     libopencv-dev \
     libprotobuf-dev \
     libprotoc-dev \
+	python3-rosdep \
+    && rm -rf /var/lib/apt/lists/*
+
+	
+RUN apt-get update && apt-get install -y \
     python3-pip \
-    python3-rosdep \
     python3-rosinstall \
     python3-rosinstall-generator \
     python3-wstool \
-    python3-catkin-tools \
-    ros-noetic-catkin \
-    ros-noetic-rosbridge-suite \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install ROS Noetic
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' \
-    && curl -sSL 'http://packages.ros.org/ros.key' | apt-key add - \
-    && apt-get update \
-    && apt-get install -y ros-noetic-desktop-full \
-    && rosdep init \
-    && rosdep update \
-    && echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+    ros-noetic-rosbridge-suite
 
 # Install MAVROS and dependencies
 RUN apt-get update && apt-get install -y \
@@ -88,6 +79,12 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
     echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
     echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc
+	
+# Install X11 support for Gazebo (Display Interface)
+RUN apt-get install -y x11-xserver-utils
+
+# Expose the display for GUI-based applications
+ENV DISPLAY=:0
 
 # Set working directory and source environment at container startup
 WORKDIR /root
