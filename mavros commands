@@ -1,0 +1,69 @@
+# Step 1: Arm the UAV
+rosservice call /uav0/mavros/cmd/arming "value: true"
+
+rosservice call /uav0/mavros/set_mode "custom_mode: 'OFFBOARD'"
+
+# Step 2: Takeoff to 5 meters altitude
+rosservice call /uav0/mavros/cmd/takeoff "min_pitch: 0.0 
+yaw: 0.0 
+latitude: 0.0 
+longitude: 0.0 
+altitude: 5.0"
+
+
+
+# Step 3: Publish a setpoint (waypoint)
+rostopic pub /uav0/mavros/setpoint_position/local geometry_msgs/PoseStamped "header:
+  stamp: {secs: 0, nsecs: 0}
+  frame_id: 'map'
+pose:
+  position:
+    x: 10.0
+    y: 5.0
+    z: 8.0
+  orientation:
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0"
+
+# Step 4: Upload waypoints to the UAV
+rosservice call /uav0/mavros/mission/push "start_index: 0
+waypoints:
+  - frame: 0
+    command: 16
+    is_current: false
+    autocontinue: true
+    param1: 0.0
+    param2: 0.0
+    param3: 0.0
+    param4: 0.0
+    x_lat: 10.0
+    y_long: 5.0
+    z_alt: 8.0
+  - frame: 0
+    command: 16
+    is_current: false
+    autocontinue: true
+    param1: 0.0
+    param2: 0.0
+    param3: 0.0
+    param4: 0.0
+    x_lat: 12.0
+    y_long: 6.0
+    z_alt: 8.0
+  - frame: 0
+    command: 16
+    is_current: false
+    autocontinue: true
+    param1: 0.0
+    param2: 0.0
+    param3: 0.0
+    param4: 0.0
+    x_lat: 14.0
+    y_long: 7.0
+    z_alt: 8.0"
+
+# Step 5: Start the mission
+rosservice call /uav0/mavros/set_mode "custom_mode: 'AUTO.MISSION'"
+
