@@ -78,7 +78,8 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
     echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
-    echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc
+    echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc \
+    echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
 	
 # Install X11 support for Gazebo (Display Interface)
 RUN apt-get install -y x11-xserver-utils
