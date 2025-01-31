@@ -126,12 +126,6 @@ catkin_make
    ```bash
    docker build -t px4_jason .
    ```
-
-3. **Run the Docker container with the necessary tools installed**:
-   ```bash
-   docker run -it --rm --privileged px4_jason
-   ```
-
 ---
 
 ### **For Windows Users (with VCXsrv)**
