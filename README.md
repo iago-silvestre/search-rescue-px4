@@ -114,8 +114,27 @@ source /opt/ros/noetic/setup.bash
 catkin_make
 ```
 ---
-## **Installation Setup (With Docker)**
 
+## **Environment Variables**
+
+The following environment variables are set in your `~/.bashrc` for the project to work:
+
+```bash
+echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
+echo "source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot ~/PX4-Autopilot/build/px4_sitl_default" >> ~/.bashrc
+echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot" >> ~/.bashrc
+echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/simulation/gazebo-classic/sitl_gazebo-classic" >> ~/.bashrc
+echo "export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc
+echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc
+echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
+source ~/.bashrc
+```
+
+These variables are sourced automatically when you start a new shell.
+
+---
+## **Installation Setup (With Docker)**
+Alternatively, you can run this setup using Docker. For [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) it is recommended to have [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) installed.
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/iago-silvestre/search-rescue-px4.git
@@ -159,24 +178,7 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
 
 
 ---
-## **Environment Variables**
 
-The following environment variables are set in your `~/.bashrc` for the project to work:
-
-```bash
-echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc
-echo "source ~/PX4-Autopilot/Tools/setup_gazebo.bash ~/PX4-Autopilot ~/PX4-Autopilot/build/px4_sitl_default" >> ~/.bashrc
-echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot" >> ~/.bashrc
-echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/simulation/gazebo-classic/sitl_gazebo-classic" >> ~/.bashrc
-echo "export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc
-echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc
-echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
-source ~/.bashrc
-```
-
-These variables are sourced automatically when you start a new shell.
-
----
 ## **How to Use the Setup**
 Start by running the Gazebo Simulation and spawning the PX4 UAVs
 ```bash
