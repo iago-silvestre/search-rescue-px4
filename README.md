@@ -1,9 +1,9 @@
 # **Jason BDI Agents for UAV Control in PX4 SITL Search and Rescue Simulation**
+Examples of Embedded-MAS at /Agents
 
+Example of Gustavo Old Code at /src/Gustavo, more details at https://github.com/Rezenders/active-perception-experiments
 ## **Introduction**
-Examples of Embedded-MAS at Agents
 
-Example of Gustavo Old Code at src/Gustavo, more details at https://github.com/Rezenders/active-perception-experiments
 
 
 This project demonstrates the use of **Jason BDI (Belief-Desire-Intention) agents** to control **Unmanned Aerial Vehicles (UAVs)** in a **PX4 SITL (Software In The Loop)** search and rescue simulation. The goal is to showcase the application of **BDI cognitive architectures** in autonomous UAV systems, focusing on their ability to plan and execute search and rescue missions in simulated environments.
