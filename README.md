@@ -1,5 +1,5 @@
 # **Jason BDI Agents for UAV Control in PX4 SITL Search and Rescue Simulation**
-Examples of Embedded-MAS at /Agents
+Examples of Embedded-MAS at /Agents , more details at https://github.com/embedded-mas/embedded-mas/tree/master/examples/jacamo/ros
 
 Example of Gustavo Old Code at /src/Gustavo, more details at https://github.com/Rezenders/active-perception-experiments
 ## **Introduction**
