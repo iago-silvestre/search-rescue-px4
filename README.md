@@ -122,11 +122,11 @@ cd search-rescue-px4
 ```
 Build the Docker image
 ```bash
-docker build -t px4_ros_noetic_java_rosbridge .
+docker build -t px4_jason .
 ```
 And to run the container with all the necessary tools installed.
 ```bash
-docker run -it --rm --privileged px4_ros_noetic_java_rosbridge
+docker run -it --rm --privileged px4_jason
 ```
 
 ---
