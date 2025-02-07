@@ -1,43 +1,20 @@
-# Use Ubuntu 20.04 as base image
-FROM osrf/ros:noetic-desktop-full
+# Use the official PX4 development image with ROS Noetic
+FROM px4io/px4-dev-ros-noetic
 
 # Set noninteractive mode for apt
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Update package list and install necessary dependencies
+# Update package list and install additional dependencies
 RUN apt-get update && apt-get install -y \
     git \
     wget \
-    lsb-release \
-    sudo \
     curl \
     unzip \
-    build-essential \
-    cmake \
-    ninja-build \
-    protobuf-compiler \
-    libeigen3-dev \
-    libgstreamer1.0-dev \
-    libgstreamer-plugins-base1.0-dev \
-    libopencv-dev \
-    libprotobuf-dev \
-    libprotoc-dev \
-	python3-rosdep \
-    && rm -rf /var/lib/apt/lists/*
-
-	
-RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-rosinstall \
     python3-rosinstall-generator \
     python3-wstool \
-    ros-noetic-rosbridge-suite
-
-# Install MAVROS and dependencies
-RUN apt-get update && apt-get install -y \
-    ros-noetic-mavros \
-    ros-noetic-mavros-extras \
-    ros-noetic-geographic-msgs \
+    ros-noetic-rosbridge-suite \
     && rm -rf /var/lib/apt/lists/*
 
 # Install GeographicLib datasets for MAVROS
@@ -51,10 +28,11 @@ RUN apt-get update && apt-get install -y openjdk-21-jdk \
     && echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> ~/.bashrc
 
 # Clone and setup PX4-Autopilot
-RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot && \
-    cd ~/PX4-Autopilot && \
-    bash ./Tools/setup/ubuntu.sh
-
+RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git /root/PX4-Autopilot && \
+    cd /root/PX4-Autopilot && \
+    bash ./Tools/setup/ubuntu.sh && \
+    make px4_sitl_default
+	
 # Create catkin workspace and clone search-rescue-px4
 RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
     git clone https://github.com/iago-silvestre/search-rescue-px4.git
@@ -78,9 +56,9 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
     echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
-    echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc \
+    echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
     echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
-	
+
 # Install X11 support for Gazebo (Display Interface)
 RUN apt-get install -y x11-xserver-utils
 
@@ -90,4 +68,3 @@ ENV DISPLAY=:0
 # Set working directory and source environment at container startup
 WORKDIR /root
 ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && exec bash"]
-
