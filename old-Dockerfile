@@ -1,5 +1,5 @@
 # Use Ubuntu 20.04 as base image
-FROM ubuntu:20.04
+FROM osrf/ros:noetic-desktop-full
 
 # Set noninteractive mode for apt
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
     lsb-release \
     sudo \
     curl \
-    gnupg2 \
     unzip \
     build-essential \
     cmake \
@@ -20,27 +19,19 @@ RUN apt-get update && apt-get install -y \
     libeigen3-dev \
     libgstreamer1.0-dev \
     libgstreamer-plugins-base1.0-dev \
-    libgazebo11-dev \
     libopencv-dev \
     libprotobuf-dev \
     libprotoc-dev \
+	python3-rosdep \
+    && rm -rf /var/lib/apt/lists/*
+
+	
+RUN apt-get update && apt-get install -y \
     python3-pip \
-    python3-rosdep \
     python3-rosinstall \
     python3-rosinstall-generator \
     python3-wstool \
-    python3-catkin-tools \
-    ros-noetic-catkin \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install ROS Noetic
-RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list' \
-    && curl -sSL 'http://packages.ros.org/ros.key' | apt-key add - \
-    && apt-get update \
-    && apt-get install -y ros-noetic-desktop-full \
-    && rosdep init \
-    && rosdep update \
-    && echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+    ros-noetic-rosbridge-suite
 
 # Install MAVROS and dependencies
 RUN apt-get update && apt-get install -y \
@@ -58,14 +49,6 @@ RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/
 RUN apt-get update && apt-get install -y openjdk-21-jdk \
     && echo "export JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64" >> ~/.bashrc \
     && echo "export PATH=\$JAVA_HOME/bin:\$PATH" >> ~/.bashrc
-
-# Install Gradle 8.1
-WORKDIR /root
-RUN wget https://services.gradle.org/distributions/gradle-8.1-bin.zip \
-    && unzip gradle-8.1-bin.zip -d /opt/ \
-    && rm gradle-8.1-bin.zip \
-    && echo "export GRADLE_HOME=/opt/gradle-8.1" >> ~/.bashrc \
-    && echo "export PATH=\$GRADLE_HOME/bin:\$PATH" >> ~/.bashrc
 
 # Clone and setup PX4-Autopilot
 RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git ~/PX4-Autopilot && \
@@ -95,9 +78,15 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
     echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
-    echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc
+    echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc \
+    echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
+	
+# Install X11 support for Gazebo (Display Interface)
+RUN apt-get install -y x11-xserver-utils
+
+# Expose the display for GUI-based applications
+ENV DISPLAY=:0
 
 # Set working directory and source environment at container startup
 WORKDIR /root
 ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && exec bash"]
-
