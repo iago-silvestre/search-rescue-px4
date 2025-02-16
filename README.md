@@ -162,11 +162,6 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
    docker run -it --rm --env DISPLAY=host.docker.internal:0 --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host px4_jason
    ```
 
-2.1 **Alternative to run the container**:
-   ```bash
-   docker run -it --privileged -e DISPLAY=host.docker.internal:0 -v /tmp/.X11-unix:/tmp/.X11-unix:ro -p 14540:14540/udp --name=px4_jason_container px4_jason
-  ```
-
 ---
 
 ### **For Linux Users**
