@@ -184,7 +184,8 @@ You can open another terminal in the docker image by joining the same container,
    ```bash
    docker ps
    ```
-Then you can join your container on a new terminal by entering, make sure to replace container_name to your own
+Then you can join your container on a new terminal by entering, make sure to replace container_name to your own:
+
 2. **Open a new terminal in the container**:
    ```bash
    docker exec -ti container_name bash
