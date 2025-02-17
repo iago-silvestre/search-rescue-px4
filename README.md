@@ -184,6 +184,11 @@ Start by running the Gazebo Simulation and spawning the PX4 UAVs
 ```bash
 roslaunch search-rescue-px4 multi_uav_mavros_sitl.launch 
 ```
+This should open a ROS-Gazebo simulation of 3 UAVs in a rescue scenario. From there you can control these UAVs with MAVROS topics and services such as
+```bash
+rosservice call /uav0/mavros/cmd/arming 1
+```
+This arms the motors of uav0
 
 *(More Instructions to be filled in later)*
 
