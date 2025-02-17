@@ -203,8 +203,11 @@ This should open a ROS-Gazebo simulation of 3 UAVs in a rescue scenario. From th
 ```bash
 rosservice call /uav0/mavros/cmd/arming 1
 ```
-This arms the motors of uav0
-
+This arms the motors of uav0, and you should see in the same terminal the response
+```bash
+success: True
+result: 0
+```
 *(More Instructions to be filled in later)*
 
 ---
