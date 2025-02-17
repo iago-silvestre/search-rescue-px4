@@ -178,6 +178,21 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
    
 
 ---
+### **Tips for Docker**
+You can open another terminal in the docker image by joining the same container, first check which containers are running:
+1. **Check running containers**:
+   ```bash
+   docker ps
+   ```
+Then you can join your container on a new terminal by entering, make sure to replace container_name to your own
+2. **Open a new terminal in the container**:
+   ```bash
+   docker exec -ti container_name bash
+   ```
+   
+
+---
+
 
 ## **How to Use the Setup**
 Start by running the Gazebo Simulation and spawning the PX4 UAVs
