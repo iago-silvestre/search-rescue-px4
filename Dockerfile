@@ -60,5 +60,5 @@ RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git /root/PX4-Aut
 ENV DISPLAY=:0
 
 # Set working directory and source environment at container startup
-WORKDIR /root
-ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && exec bash"]
+WORKDIR /root/catkin_ws/src/search-rescue-px4
+ENTRYPOINT ["/bin/bash", "-c", "git pull && source ~/.bashrc && exec bash"]
