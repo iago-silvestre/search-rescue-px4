@@ -61,4 +61,4 @@ ENV DISPLAY=:0
 
 # Set working directory and source environment at container startup
 WORKDIR /root
-ENTRYPOINT ["/bin/bash", "-c", "source ~/.bashrc && exec bash"]
+ENTRYPOINT ["/bin/bash", "-c", "git pull && source ~/.bashrc && exec bash"]
