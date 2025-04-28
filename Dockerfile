@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y \
     nano \
     ros-noetic-xacro \
     ros-noetic-rosbridge-suite \
+    ros-noetic-gazebo-plugins \
+    ros-noetic-gazebo-ros-pkgs \
     ros-noetic-rosparam-shortcuts \
     libcgal-dev \
     openjdk-21-jdk \
