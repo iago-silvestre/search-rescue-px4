@@ -56,10 +56,11 @@
 
 
         
-        <!-- Spawn the Camera Model in Gazebo -->
+                <!-- Spawn the Camera Model in Gazebo -->
         <node name="spawn_camera" pkg="gazebo_ros" type="spawn_model" output="screen"
-            launch-prefix="bash -c 'sleep 5; exec '" 
+            launch-prefix="bash -c 'sleep 10; exec '" 
             args="-param robot_description -urdf -model $(arg uav_name)_camera -robot_namespace /$(arg uav_name)/camera"/>
+        
         
     </group>
 
