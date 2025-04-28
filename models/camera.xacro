@@ -2,7 +2,7 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- Define arguments -->
-  <xacro:arg name="uav_name" default="uav0"/>
+  <xacro:arg name="uav_name" default="iris0"/>
   <xacro:arg name="parent_link" default="base_link"/>
 
   <!-- Define the camera link -->
