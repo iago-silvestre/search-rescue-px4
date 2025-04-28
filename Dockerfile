@@ -15,6 +15,8 @@ RUN apt-get update && apt-get install -y \
     python3-rosinstall-generator \
     python3-wstool \
     ros-noetic-rosbridge-suite \
+    ros-noetic-rosparam-shortcuts \
+    libcgal-dev \
     openjdk-21-jdk \
     x11-xserver-utils \
     && rm -rf /var/lib/apt/lists/*

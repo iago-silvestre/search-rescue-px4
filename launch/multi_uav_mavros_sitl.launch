@@ -4,7 +4,7 @@
     <!-- launches Gazebo environment and 2x: MAVROS, PX4 SITL, and spawns vehicle -->
     <!-- vehicle model and world -->
     <arg name="est" default="ekf2"/>
-    <arg name="vehicle" default="iris_vision"/>
+    <arg name="vehicle" default="iris_opt_flow"/>
     <arg name="world" default="$(find search-rescue-px4)/worlds/rescue.world"/>
     <!-- gazebo configs -->
     <arg name="gui" default="true"/>
