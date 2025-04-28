@@ -33,7 +33,8 @@ RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/
 # Create catkin workspace and clone search-rescue-px4
 RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
     git clone https://github.com/iago-silvestre/search-rescue-px4.git && \
-    git clone https://github.com/Greenzie/boustrophedon_planner.git
+    git clone https://github.com/Greenzie/boustrophedon_planner.git && \
+    git clone https://github.com/YUHANG-Ma/gazebo_ros_link_attacher
 
 # Build catkin workspace
 WORKDIR /root/catkin_ws
