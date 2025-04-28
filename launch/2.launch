@@ -19,6 +19,8 @@
         <arg name="verbose" value="$(arg verbose)"/>
         <arg name="paused" value="$(arg paused)"/>
     </include>
+    <node name="link_attacher_server" pkg="gazebo_ros_link_attacher" type="attach.py" output="screen"/>
+
     <!-- UAV0 -->
     <group ns="uav0">
         <!-- MAVROS and vehicle configs -->
@@ -41,15 +43,12 @@
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
         <node name="spawn_camera_uav0" pkg="gazebo_ros" type="spawn_model" output="screen"
-        args="-file $(find search-rescue-px4)/models/camera_box/model.sdf -sdf -model uav0_camera -x 0 -y 0 -z 0.1 -Y 0"/>
+            args="-file $(find search-rescue-px4)/models/camera_box/model.sdf -sdf -model uav0_camera -x 0 -y 0 -z 0.1 -Y 0"/>
 
         <!-- Attach the camera to the drone -->
-        <node name="attach_camera_uav0" pkg="gazebo_ros_link_attacher" type="attach" output="screen">
-            <param name="model1" value="iris0"/>  <!-- The drone model -->
-            <param name="link1" value="base_link"/>  <!-- Link of the drone -->
-            <param name="model2" value="uav0_camera"/>  <!-- The camera model -->
-            <param name="link2" value="camera_link"/>  <!-- Link of the camera -->
-        </node>
+        <node name="attach_camera_uav0" pkg="rosbash" type="rosbash" output="screen"
+            args="sleep 3 && rosservice call /link_attacher_node/attach '{model_name_1: iris0, link_name_1: base_link, model_name_2: uav0_camera, link_name_2: camera_link}'"/>
+
 
     
 
