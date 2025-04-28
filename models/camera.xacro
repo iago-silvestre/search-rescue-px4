@@ -28,7 +28,7 @@
   </link>
 
   <joint name="${uav_name}_camera_joint" type="fixed">
-    <parent link="$(arg parent_link)"/>
+    <parent link="${parent_link}"/>
     <child link="${uav_name}_camera_link"/>
     <origin xyz="0 0 0.1" rpy="0 0 0"/> <!-- Mounted 10cm above base_link -->
   </joint>
@@ -55,7 +55,7 @@
       <plugin name="${uav_name}_camera_controller" filename="libgazebo_ros_camera.so">
         <always_on>true</always_on>
         <update_rate>30.0</update_rate>
-        <camera_name>$(arg uav_name)/camera</camera_name>
+        <camera_name>${uav_name}/camera</camera_name>
         <image_topic_name>image_raw</image_topic_name>
         <camera_info_topic_name>camera_info</camera_info_topic_name>
         <frame_name>${uav_name}_camera_link</frame_name>
