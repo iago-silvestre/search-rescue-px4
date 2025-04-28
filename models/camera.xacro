@@ -1,9 +1,10 @@
 <?xml version="1.0"?>
-<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="camera_${uav_name}">
-
-  <!-- Arguments -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <!-- Define arguments -->
   <xacro:arg name="uav_name" default="uav0"/>
   <xacro:arg name="parent_link" default="base_link"/>
+
+  <robot name="camera_${uav_name}">
 
   <!-- Camera link -->
   <link name="${uav_name}_camera_link">
