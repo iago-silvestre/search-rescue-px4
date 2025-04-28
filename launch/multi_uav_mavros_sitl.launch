@@ -4,7 +4,7 @@
     <!-- launches Gazebo environment and 2x: MAVROS, PX4 SITL, and spawns vehicle -->
     <!-- vehicle model and world -->
     <arg name="est" default="ekf2"/>
-    <arg name="vehicle" default="px4flow"/>
+    <arg name="vehicle" default="iris"/>
     <arg name="world" default="$(find search-rescue-px4)/worlds/rescue.world"/>
     <!-- gazebo configs -->
     <arg name="gui" default="true"/>
@@ -39,6 +39,7 @@
             <arg name="gst_udp_port" value="$(eval 5600 + arg('ID'))"/>
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
+            <arg name="urdf" value="$(find search-rescue-px4)/models/camera.xacro"/>
         </include>
         <!-- MAVROS -->
         <include file="$(find mavros)/launch/px4.launch">

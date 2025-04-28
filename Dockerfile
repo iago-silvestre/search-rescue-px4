@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install -y \
     python3-rosinstall \
     python3-rosinstall-generator \
     python3-wstool \
+    nano \
     ros-noetic-rosbridge-suite \
     ros-noetic-rosparam-shortcuts \
     libcgal-dev \
