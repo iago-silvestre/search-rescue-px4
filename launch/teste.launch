@@ -21,7 +21,6 @@
     </include>
     
     <!-- UAV0 -->
-    <arg name="uav0" value="uav0"/>
     <group ns="uav0">
         <!-- MAVROS and vehicle configs -->
         <arg name="ID" value="0"/>
@@ -53,7 +52,7 @@
         
         <!-- Camera Xacro Processing -->
         <arg name="camera_urdf" default="$(find search-rescue-px4)/models/camera.xacro"/>
-        <param name="robot_description" command="$(find xacro)/xacro $(find search-rescue-px4)/models/camera.xacro uav_name:=uav0 parent_link:=base_link"/>
+        <param name="robot_description" command="$(find xacro)/xacro $(find search-rescue-px4)/models/camera.xacro uav_name:=iris0 parent_link:=base_link"/>
 
 
         
