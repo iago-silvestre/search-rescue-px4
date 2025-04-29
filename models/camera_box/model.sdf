@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
   <model name="camera_box">
-    <static>false</static>
+    <static>true</static>
     <link name="camera_link">
       <pose>0 0 0 0 0 0</pose>
       <inertial>
