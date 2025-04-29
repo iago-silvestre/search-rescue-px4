@@ -10,7 +10,7 @@
     <arg name="gui" default="true"/>
     <arg name="debug" default="false"/>
     <arg name="verbose" default="false"/>
-    <arg name="paused" default="false"/>
+    <arg name="paused" default="true"/>
     <!-- Delay before starting Gazebo -->
     <arg name="gazebo_delay" default="5.0"/> <!-- Delay in seconds -->
     <!-- PX4 SITL and vehicle spawn -->
