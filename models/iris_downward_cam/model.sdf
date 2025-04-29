@@ -8,22 +8,21 @@
 
     <!-- Add downward camera -->
     <link name="downward_camera_link">
-      <pose>0 0 -0.1 0 1.5708 0</pose> <!-- 10cm below, rotated 90° downward -->
-      <inertial>
-        <mass>0.0</mass>
-        <inertia>
-          <ixx>0.000</ixx>
-          <ixy>0</ixy>
-          <ixz>0</ixz>
-          <iyy>0.000</iyy>
-          <iyz>0</iyz>
-          <izz>0.000</izz>
-        </inertia>
-      </inertial>
+      <pose>0 0 -0.1 0 1.57079632679 0</pose> <!-- 10cm below, facing downward -->
+      
+      <!-- Collision removed since it's not needed for a camera -->
+      
+      <visual name="camera_visual">
+        <geometry>
+          <box>
+            <size>0.03 0.03 0.03</size>
+          </box>
+        </geometry>
+      </visual>
+      
       <sensor name="downward_camera" type="camera">
-        <pose>0 0 0 0 0 0</pose>
         <camera>
-          <horizontal_fov>1.3962634</horizontal_fov>
+          <horizontal_fov>1.047</horizontal_fov> <!-- 60 degrees -->
           <image>
             <width>640</width>
             <height>480</height>
@@ -36,19 +35,28 @@
         </camera>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
-        <visualize>false</visualize>
+        <visualize>true</visualize>
+        
+        <!-- ROS plugin configuration -->
         <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-          <robotNamespace/>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30.0</updateRate>
           <cameraName>downward_camera</cameraName>
           <imageTopicName>image_raw</imageTopicName>
           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-          <frameName>camera_link</frameName>
+          <frameName>downward_camera_link</frameName>
+          <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
         </plugin>
       </sensor>
     </link>
     
-    <joint name="downward_camera_joint" type="fixed">
-      <parent>base_link</parent>
+    <joint name="camera_joint" type="fixed">
+      <parent>iris::base_link</parent>
       <child>downward_camera_link</child>
     </joint>
   </model>
