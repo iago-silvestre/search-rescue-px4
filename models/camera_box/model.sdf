@@ -41,9 +41,13 @@
         </plugin>
       </sensor>
     </link>
+
+    <!-- COPY FROM HERE -->
+    <joint name="camera_joint" type="fixed">
+      <parent>iris0::base_link</parent>
+      <child>camera_link</child>
+    </joint>
+    <!-- TO HERE -->
+
   </model>
-  <joint name="camera_joint" type="fixed">
-    <parent>iris0::base_link</parent>
-    <child>camera_link</child>
-  </joint>
 </sdf>

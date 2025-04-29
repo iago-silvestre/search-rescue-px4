@@ -54,12 +54,6 @@
                     -R 0 -P 0 -Y 0"
                     launch-prefix="bash -c 'sleep 5; $0 $@'"/>
         
-        <!-- 4. Verify camera topics -->
-        <node name="list_camera_topics" pkg="rostopic" type="rostopic"
-            args="list | grep camera"
-            output="screen"
-            launch-prefix="bash -c 'sleep 6; $0 $@'"/>
-
         <!-- Attach the camera to the drone -->
         <!--node name="attach_camera" pkg="search-rescue-px4" type="attach_camera.sh" output="screen"
             launch-prefix="bash -c 'exec $0'"/-->
