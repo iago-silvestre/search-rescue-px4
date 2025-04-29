@@ -68,6 +68,7 @@ RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git /root/PX4-Aut
     bash ./Tools/setup/ubuntu.sh && \
     DONT_RUN=1 make px4_sitl_default gazebo-classic
 
+RUN chmod +x /root/catkin_ws/src/search-rescue-px4/scripts/*    
 # Expose the display for GUI-based applications
 ENV DISPLAY=:0
 
