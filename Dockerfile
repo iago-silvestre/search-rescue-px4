@@ -18,6 +18,8 @@ RUN apt-get update && apt-get install -y \
     ros-noetic-xacro \
     ros-noetic-rosbridge-suite \
     ros-noetic-gazebo-plugins \
+    htop \
+    ros-noetic-rviz \
     ros-noetic-gazebo-ros-pkgs \
     ros-noetic-rosparam-shortcuts \
     libcgal-dev \
@@ -34,7 +36,7 @@ RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/
 RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
     git clone https://github.com/iago-silvestre/search-rescue-px4.git && \
     git clone https://github.com/Greenzie/boustrophedon_planner.git && \
-    git clone https://github.com/pal-robotics/gazebo_ros_link_attacher
+    git clone https://github.com/iago-silvestre/gazebo_ros_link_attacher
 
 # Build catkin workspace
 WORKDIR /root/catkin_ws
