@@ -17,7 +17,7 @@
         <arg name="fcu_url" default="udp://:14540@host.docker.internal:14580"/>
         
         <!-- Use custom model with camera -->
-        <arg name="model" value="$(find mavlink_sitl_gazebo)/models/iris_downward_camera/iris_downward_camera.sdf"/>
+        <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
         
         <!-- PX4 SITL -->
         <node name="sitl" pkg="px4" type="px4" output="screen"
