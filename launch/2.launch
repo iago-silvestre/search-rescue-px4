@@ -49,7 +49,7 @@
           args="-sdf -database camera -model downward_cam
                 -x 0 -y 0 -z -0.1
                 -R 0 -P 1.5708 -Y 0
-                -reference_frame iris0"
+                -reference_frame iris0::base_link"
           output="screen"/>
         
         <!-- Attach the camera to the drone -->
