@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <sdf version="1.6">
-  <model name="iris_downward_cam">
+  <model name="iris_cam">
     <!-- Include the standard iris model -->
     <!--include>
       <uri>model://iris</uri>
     </include-->
 
     <!-- Add downward camera -->
-    <link name="downward_camera_link">
+    <link name="camera_link">
       <pose>0 0 -0.1 0 1.57079632679 0</pose> <!-- 10cm below, facing downward -->
       
       <!-- Collision removed since it's not needed for a camera -->
@@ -45,7 +45,7 @@
         </camera>
         <always_on>1</always_on>
         <update_rate>30</update_rate>
-        <visualize>true</visualize>
+        <visualize>false</visualize>
         
         <!-- ROS plugin configuration -->
         <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
@@ -54,7 +54,7 @@
           <cameraName>downward_camera</cameraName>
           <imageTopicName>image_raw</imageTopicName>
           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
-          <frameName>downward_camera_link</frameName>
+          <frameName>camera_link</frameName>
           <hackBaseline>0.07</hackBaseline>
           <distortionK1>0.0</distortionK1>
           <distortionK2>0.0</distortionK2>
@@ -67,7 +67,7 @@
     
     <joint name="camera_joint" type="fixed">
       <parent>iris0::base_link</parent>
-      <child>downward_camera_link</child>
+      <child>camera_link</child>
     </joint>
   </model>
 </sdf>
