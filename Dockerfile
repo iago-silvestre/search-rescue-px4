@@ -62,13 +62,15 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
     echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
 
+RUN find /root/catkin_ws/src/search-rescue-px4/scripts -type f -name "*.sh" -exec chmod +x {} +
+
 # Clone and setup PX4-Autopilot
 RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git /root/PX4-Autopilot && \
     cd /root/PX4-Autopilot && \
     bash ./Tools/setup/ubuntu.sh && \
     DONT_RUN=1 make px4_sitl_default gazebo-classic
 
-RUN chmod +x /root/catkin_ws/src/search-rescue-px4/scripts/*    
+
 # Expose the display for GUI-based applications
 ENV DISPLAY=:0
 
