@@ -15,6 +15,13 @@
           <izz>0.000</izz>
         </inertia>
       </inertial>
+      <visual name="camera_visual">
+        <geometry>
+          <box>
+            <size>0.03 0.03 0.03</size>
+          </box>
+        </geometry>
+      </visual>
       <sensor name="downward_camera" type="camera">
         <pose>0 0 0 0 0 0</pose>
         <camera>
@@ -41,7 +48,7 @@
         </plugin>
       </sensor>
     </link>
-    
+
     <joint name="camera_joint" type="fixed">
       <parent>iris0::base_link</parent>
       <child>downward_camera_link</child>
