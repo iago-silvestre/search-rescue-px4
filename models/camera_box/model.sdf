@@ -40,7 +40,7 @@
         <update_rate>30</update_rate>
         <visualize>false</visualize>
         <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
-          <robotNamespace>iris0</robotNamespace>
+          <robotNamespace/>
           <cameraName>downward_camera</cameraName>
           <imageTopicName>image_raw</imageTopicName>
           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
@@ -48,10 +48,5 @@
         </plugin>
       </sensor>
     </link>
-
-    <joint name="camera_joint" type="fixed">
-      <parent>iris0::base_link</parent>
-      <child>downward_camera_link</child>
-    </joint>
   </model>
 </sdf>
