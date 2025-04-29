@@ -44,19 +44,12 @@
             <arg name="tgt_component" value="1"/>
         </include>
         
-        <node name="spawn_downward_camera" pkg="gazebo_ros" type="spawn_model" 
-          args="-sdf -database camera -model downward_cam 
-                -x 0 -y 0 -z -0.1 
-                -R 0 -P 1.5708 -Y 0  
-                -reference_frame iris0::base_link" 
-          output="screen"
-          launch-prefix="bash -c 'sleep 3; $0 $@'"/>
-    
-        <!-- 3. Optional: View the camera feed -->
-        <node name="rqt_viewer" pkg="rqt_image_view" type="rqt_image_view" 
-          args="--force-discover">
-        <remap from="image" to="/downward_cam/image_raw"/>
-    </node>
+        <node name="attach_camera" pkg="gazebo_ros" type="spawn_model"
+            args="-sdf -file $(find search-rescue-px4)/config/camera.sdf -model downward_cam
+                    -x 0 -y 0 -z -0.1
+                    -R 0 -P 1.5708 -Y 0
+                    -reference_frame iris::base_link"
+            output="screen"/>
     </group>
 
     <!-- Delay before starting Gazebo -->
