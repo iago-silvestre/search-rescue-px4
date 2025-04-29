@@ -38,9 +38,9 @@
         </include>
         
         <!-- Camera viewer -->
-        <node pkg="image_view" type="image_view" name="image_view" output="screen">
+        <!-- node pkg="image_view" type="image_view" name="image_view" output="screen">
             <remap from="image" to="/uav0/camera/image_raw"/>
-        </node>
+        </node-->
     </group>
 
     <!-- Gazebo sim -->
