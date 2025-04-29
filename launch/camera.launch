@@ -1,6 +1,0 @@
-<launch>
-    <arg name="camera_urdf" default="$(find search-rescue-px4)/models/camera.xacro"/>
-    <param name="robot_description" command="$(find xacro)/xacro $(find search-rescue-px4)/models/camera.xacro uav_name:=uav0 parent_link:=base_link"/>
-    <node name="gazebo" pkg="gazebo_ros" type="gzserver" args="-e roscore"/>
-    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient"/>
-</launch>

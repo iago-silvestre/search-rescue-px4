@@ -11,6 +11,9 @@
     <arg name="debug" default="false"/>
     <arg name="verbose" default="false"/>
     <arg name="paused" default="false"/>
+    <gazebo>
+        <plugin name="link_attacher_plugin" filename="libgazebo_ros_link_attacher.so"/>
+    </gazebo>
     <!-- Gazebo sim -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="gui" value="$(arg gui)"/>
@@ -40,6 +43,12 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
+        <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
+        <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
+              args="-sdf -file $(arg model) -model cam$(arg ID) -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"
+              launch-prefix="bash -c 'sleep 5; $0 $@'"/>
+        <node name="attach_camera" pkg="search-rescue-px4" type="cam0.sh" output="screen"
+            launch-prefix="bash -c 'exec $0'"/>
         <!-- MAVROS -->
         <include file="$(find mavros)/launch/px4.launch">
             <arg name="fcu_url" value="$(arg fcu_url)"/>
@@ -47,6 +56,7 @@
             <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
             <arg name="tgt_component" value="1"/>
         </include>
+
     </group>
     <!-- UAV1 -->
     <group ns="uav1">
@@ -69,6 +79,12 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
+        <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
+        <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
+              args="-sdf -file $(arg model) -model cam$(arg ID) -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"
+              launch-prefix="bash -c 'sleep 5; $0 $@'"/>
+        <node name="attach_camera" pkg="search-rescue-px4" type="cam1.sh" output="screen"
+            launch-prefix="bash -c 'exec $0'"/>
         <!-- MAVROS -->
         <include file="$(find mavros)/launch/px4.launch">
             <arg name="fcu_url" value="$(arg fcu_url)"/>
@@ -98,6 +114,12 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
+        <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
+        <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
+              args="-sdf -file $(arg model) -model cam$(arg ID) -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"
+              launch-prefix="bash -c 'sleep 5; $0 $@'"/>
+        <node name="attach_camera" pkg="search-rescue-px4" type="cam2.sh" output="screen"
+            launch-prefix="bash -c 'exec $0'"/>
         <!-- MAVROS -->
         <include file="$(find mavros)/launch/px4.launch">
             <arg name="fcu_url" value="$(arg fcu_url)"/>
