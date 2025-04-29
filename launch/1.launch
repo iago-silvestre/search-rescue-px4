@@ -56,7 +56,7 @@
         <arg name="camera_model" default="cam0"/>
         <arg name="camera_link" default="camera_link"/>
         <node pkg="search-rescue-px4" type="attach_camera.sh" name="attach_camera_node" output="screen" launch-prefix="bash" args="$(arg drone_model) $(arg drone_link) $(arg camera_model) $(arg camera_link)"/-->
-        <node name="attach_camera" pkg="search-rescue-px4" type="attach_camera.sh" output="screen"
+        <node name="attach_camera" pkg="search-rescue-px4" type="cam0.sh" output="screen"
             launch-prefix="bash -c 'exec $0'"/>
         
         
