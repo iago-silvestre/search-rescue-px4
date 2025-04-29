@@ -45,7 +45,7 @@
         </include>
         
         <node name="attach_camera" pkg="gazebo_ros" type="spawn_model"
-      args="-sdf -file $(find px4)/Tools/simulation/gazebo-classic/sitl_gazebo-classic/models/flow_cam/flow_cam.sdf -model downward_cam
+      args="-sdf -file $(find px4)/Tools/simulation/gazebo-classic/sitl_gazebo-classic/models/c920/c920.sdf -model downward_cam
             -x 0 -y 0 -z -0.1
             -R 0 -P 1.5708 -Y 0
             -reference_frame iris0::base_link"
