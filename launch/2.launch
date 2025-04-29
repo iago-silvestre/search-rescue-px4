@@ -19,7 +19,8 @@
         <arg name="verbose" value="$(arg verbose)"/>
         <arg name="paused" value="$(arg paused)"/>
     </include>
-    <node name="link_attacher_server" pkg="gazebo_ros_link_attacher" type="attach.py" output="screen"/>
+    <node name="link_attacher_node" pkg="gazebo_ros_link_attacher" type="link_attacher_node" output="screen"/>
+
 
     <!-- UAV0 -->
     <group ns="uav0">
