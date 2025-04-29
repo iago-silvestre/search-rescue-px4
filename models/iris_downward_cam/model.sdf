@@ -2,9 +2,9 @@
 <sdf version="1.6">
   <model name="iris_downward_cam">
     <!-- Include the standard iris model -->
-    <include>
+    <!--include>
       <uri>model://iris</uri>
-    </include>
+    </include-->
 
     <!-- Add downward camera -->
     <link name="downward_camera_link">
