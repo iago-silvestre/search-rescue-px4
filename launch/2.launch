@@ -46,9 +46,8 @@
             args="-file $(find search-rescue-px4)/models/camera_box/model.sdf -sdf -model uav0_camera -x 0 -y 0 -z 0.1 -Y 0"/>
 
         <!-- Attach the camera to the drone -->
-        <node name="attach_camera_uav0" pkg="rosbash" type="rosbash" output="screen"
-            args="sleep 3 && rosservice call /link_attacher_node/attach &quot;{model_name_1: 'iris0', link_name_1: 'base_link', model_name_2: 'uav0_camera', link_name_2: 'camera_link'}&quot;"/>
-
+        <node name="attach_camera" pkg="your_pkg" type="attach_camera.sh" output="screen"
+            launch-prefix="bash -c 'exec $0'"/>
 
 
     
