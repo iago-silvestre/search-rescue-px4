@@ -130,7 +130,8 @@
             <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
             <arg name="tgt_component" value="1"/>
         </include>
-        <!-- rosbridge -->
+    </group>
+    <!-- rosbridge -->
         <node name="rosbridge_websocket" pkg="rosbridge_server" type="rosbridge_websocket" output="screen" />
         <!-- boustrophedon_planner_server -->
         <node pkg="boustrophedon_server" type="boustrophedon_planner_server" name="boustrophedon_server">
@@ -151,7 +152,6 @@
             <param name="publish_polygons" value="true"/>
             <param name="publish_path_points" value="true"/>
         </node>
-    </group>
 </launch>
 <!-- to add more UAVs (up to 10):
 Increase the id
