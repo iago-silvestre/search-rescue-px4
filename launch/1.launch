@@ -13,7 +13,6 @@
     <arg name="paused" default="false"/>
     <!-- Delay before starting Gazebo -->
     <arg name="gazebo_delay" default="5.0"/> <!-- Delay in seconds -->
-    <node name="link_attacher" pkg="gazebo_ros_link_attacher" type="gazebo_ros_link_attacher" output="screen"/>
     <!-- PX4 SITL and vehicle spawn -->
     <!-- UAV0 -->
     <group ns="uav0">
@@ -66,7 +65,9 @@
     <node name="gazebo_delay" pkg="rostest" type="rostest" args="--delay $(arg gazebo_delay)">
         <param name="gazebo_delay" value="$(arg gazebo_delay)"/>
     </node>
-
+    <gazebo>
+        <plugin name="link_attacher_plugin" filename="libgazebo_ros_link_attacher.so"/>
+    </gazebo>
     <!-- Gazebo sim -->
     <include file="$(find gazebo_ros)/launch/empty_world.launch">
         <arg name="gui" value="$(arg gui)"/>
