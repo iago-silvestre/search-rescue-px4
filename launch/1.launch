@@ -13,7 +13,7 @@
     <arg name="paused" default="false"/>
     <!-- Delay before starting Gazebo -->
     <arg name="gazebo_delay" default="5.0"/> <!-- Delay in seconds -->
-
+    <node name="link_attacher" pkg="gazebo_ros_link_attacher" type="gazebo_ros_link_attacher" output="screen"/>
     <!-- PX4 SITL and vehicle spawn -->
     <!-- UAV0 -->
     <group ns="uav0">
