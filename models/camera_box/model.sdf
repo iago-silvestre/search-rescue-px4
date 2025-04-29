@@ -42,12 +42,11 @@
       </sensor>
     </link>
 
-    <!-- COPY FROM HERE -->
-    <joint name="camera_joint" type="fixed">
+    <joint name="camera_attachment" type="fixed">
       <parent>iris0::base_link</parent>
       <child>camera_link</child>
+      <pose relative_to="__model__">0 0 -0.1 0 0 0</pose>
     </joint>
-    <!-- TO HERE -->
 
   </model>
 </sdf>
