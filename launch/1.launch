@@ -46,9 +46,10 @@
         
         <node name="spawn_downward_camera" pkg="gazebo_ros" type="spawn_model" 
           args="-sdf -database camera -model downward_cam 
-                -x 0 -y 0 -z -0.1  <!-- Fixed position relative to drone -->
-                -R 0 -P 1.5708 -Y 0  <!-- 90° downward pitch -->
-                -reference_frame iris::base_link"  output="screen"/>
+                -x 0 -y 0 -z -0.1 
+                -R 0 -P 1.5708 -Y 0  
+                -reference_frame iris::base_link" 
+          output="screen"/>
     
         <!-- 3. Optional: View the camera feed -->
         <node name="image_view" pkg="image_view" type="image_view" output="screen">
