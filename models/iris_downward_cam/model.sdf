@@ -11,7 +11,17 @@
       <pose>0 0 -0.1 0 1.57079632679 0</pose> <!-- 10cm below, facing downward -->
       
       <!-- Collision removed since it's not needed for a camera -->
-      
+      <inertial>
+        <mass>0.0</mass>
+        <inertia>
+          <ixx>0.000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.000</iyy>
+          <iyz>0</iyz>
+          <izz>0.000</izz>
+        </inertia>
+      </inertial>
       <visual name="camera_visual">
         <geometry>
           <box>
