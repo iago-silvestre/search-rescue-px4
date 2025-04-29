@@ -12,14 +12,14 @@
       
       <!-- Collision removed since it's not needed for a camera -->
       <inertial>
-        <mass>0.0</mass>
+        <mass>0.01</mass>
         <inertia>
-          <ixx>0.000</ixx>
+          <ixx>1e-6</ixx>
           <ixy>0</ixy>
           <ixz>0</ixz>
-          <iyy>0.000</iyy>
+          <iyy>1e-6</iyy>
           <iyz>0</iyz>
-          <izz>0.000</izz>
+          <izz>1e-6</izz>
         </inertia>
       </inertial>
       <visual name="camera_visual">
