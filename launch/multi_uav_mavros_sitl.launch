@@ -43,6 +43,7 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
+        <!-- camera -->
         <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
         <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
               args="-sdf -file $(arg model) -model cam$(arg ID) -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"
@@ -79,6 +80,7 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
+        <!-- camera -->
         <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
         <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
               args="-sdf -file $(arg model) -model cam$(arg ID) -x 5 -y 0 -z 0 -R 0 -P 0 -Y 0"
@@ -114,6 +116,7 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
+        <!-- camera -->
         <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
         <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
               args="-sdf -file $(arg model) -model cam$(arg ID) -x -5 -y 0 -z 0 -R 0 -P 0 -Y 0"
@@ -127,6 +130,25 @@
             <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
             <arg name="tgt_component" value="1"/>
         </include>
+        <!-- boustrophedon_planner_server -->
+        <node pkg="boustrophedon_server" type="boustrophedon_planner_server" name="boustrophedon_server">
+            <param name="repeat_boundary" value="false"/>
+            <param name="outline_clockwise" value="true"/>
+            <param name="skip_outlines" value="false"/>
+            <param name="outline_layer_count" value="0"/>
+            <param name="stripe_separation" value="1.9"/>
+            <param name="intermediary_separation" value="0.0"/>
+            <param name="stripe_angle" value="0.0"/>
+            <param name="enable_stripe_angle_orientation" value="true" />
+            <param name="travel_along_boundary" value="false" />
+            <param name="allow_points_outside_boundary" value="true" />
+            <!-- Note: if enabling half-y turns, must have an outline_layer_count >= 1 -->
+            <param name="enable_half_y_turns" value="false" />
+            <param name="points_per_turn" value="15" />
+            <param name="turn_start_offset" value="0.5" />
+            <param name="publish_polygons" value="true"/>
+            <param name="publish_path_points" value="true"/>
+        </node>
     </group>
 </launch>
 <!-- to add more UAVs (up to 10):
