@@ -53,9 +53,9 @@
           launch-prefix="bash -c 'sleep 3; $0 $@'"/>
     
         <!-- 3. Optional: View the camera feed -->
-        <node name="image_view" pkg="image_view" type="image_view" output="screen">
-            <remap from="image" to="/downward_cam/image_raw"/>
-        </node>
+        <node name="rqt_viewer" pkg="rqt_image_view" type="rqt_image_view" 
+          args="--force-discover">
+        <remap from="image" to="/downward_cam/image_raw"/>
     </group>
 
     <!-- Delay before starting Gazebo -->
