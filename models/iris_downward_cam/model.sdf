@@ -21,8 +21,9 @@
         </inertia>
       </inertial>
       <sensor name="downward_camera" type="camera">
+        <pose>0 0 0 0 0 0</pose>
         <camera>
-          <horizontal_fov>1.0472</horizontal_fov> <!-- 60 degrees -->
+          <horizontal_fov>1.3962634</horizontal_fov>
           <image>
             <width>640</width>
             <height>480</height>
@@ -42,7 +43,7 @@
           <imageTopicName>image_raw</imageTopicName>
           <cameraInfoTopicName>camera_info</cameraInfoTopicName>
           <frameName>camera_link</frameName>
-          </plugin>
+        </plugin>
       </sensor>
     </link>
     
