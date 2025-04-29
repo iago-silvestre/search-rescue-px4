@@ -51,8 +51,7 @@
                     -sdf 
                     -model uav0_camera 
                     -x 0 -y 0 -z -0.1 
-                    -R 0 -P 0 -Y 0 
-                    -reference_frame iris0::base_link"
+                    -R 0 -P 0 -Y 0"
                     launch-prefix="bash -c 'sleep 5; $0 $@'"/>
         
         <!-- 4. Verify camera topics -->
