@@ -4,7 +4,7 @@
     <!-- launches Gazebo environment and 2x: MAVROS, PX4 SITL, and spawns vehicle -->
     <!-- vehicle model and world -->
     <arg name="est" default="ekf2"/>
-    <arg name="vehicle" default="iris_downward_depth_camera"/>
+    <arg name="vehicle" default="iris"/>
     <arg name="world" default="$(find search-rescue-px4)/worlds/rescue.world"/>
     <!-- gazebo configs -->
     <arg name="gui" default="true"/>
@@ -45,7 +45,7 @@
         </include>
         
         <node name="attach_camera" pkg="gazebo_ros" type="spawn_model"
-      args="-sdf -file $(find px4)/Tools/simulation/gazebo-classic/sitl_gazebo-classic/models/iris_downward_depth_camera/iris_downward_depth_camera.sdf -model downward_cam
+      args="-sdf -file $(find px4)/Tools/simulation/gazebo-classic/sitl_gazebo-classic/models/flow_cam/flow_cam.sdf -model downward_cam
             -x 0 -y 0 -z -0.1
             -R 0 -P 1.5708 -Y 0
             -reference_frame iris0::base_link"
