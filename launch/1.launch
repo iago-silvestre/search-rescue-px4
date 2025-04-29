@@ -11,9 +11,6 @@
     <arg name="debug" default="false"/>
     <arg name="verbose" default="false"/>
     <arg name="paused" default="false"/>
-    <!-- camera settings -->
-    <arg name="add_downward_camera" default="true"/>
-    <arg name="camera_name" default="downward_cam"/>
     <!-- Delay before starting Gazebo -->
     <arg name="gazebo_delay" default="5.0"/> <!-- Delay in seconds -->
 
@@ -31,9 +28,7 @@
             <arg name="R" value="0"/>
             <arg name="P" value="0"/>
             <arg name="Y" value="0"/>
-            <arg name="vehicle" value="$(arg vehicle)" unless="$(arg add_downward_camera)"/>
-            <!-- Use custom model when camera is enabled -->
-            <arg name="vehicle" value="iris_downward_cam" if="$(arg add_downward_camera)"/>
+            <arg name="vehicle" value="$(arg vehicle)"/>
             <arg name="mavlink_udp_port" value="14560"/>
             <arg name="mavlink_tcp_port" value="4560"/>
             <arg name="ID" value="$(arg ID)"/>
@@ -48,17 +43,18 @@
             <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
             <arg name="tgt_component" value="1"/>
         </include>
-
-        <!-- Camera image processing -->
-        <group if="$(arg add_downward_camera)">
-            <node pkg="image_proc" type="image_proc" name="image_proc" ns="$(arg camera_name)"/>
-            
-            <!-- Optional: Add image view to see the camera output -->
-            <node pkg="image_view" type="image_view" name="image_view" output="screen">
-                <remap from="image" to="$(arg camera_name)/image_rect_color"/>
-                <param name="autosize" value="true"/>
-            </node>
-        </group>
+        
+        <node name="spawn_downward_camera" pkg="gazebo_ros" type="spawn_model" 
+          args="-sdf -database 'camera' -model downward_cam 
+                -x $(arg x) -y $(arg y) -z $(arg z - 0.1) 
+                -R $(arg R) -P 1.5708 $(arg Y) 
+                -reference_frame iris::base_link" 
+          respawn="false" output="screen"/>
+    
+        <!-- 3. Optional: View the camera feed -->
+        <node name="image_view" pkg="image_view" type="image_view" output="screen">
+            <remap from="image" to="/downward_cam/image_raw"/>
+        </node>
     </group>
 
     <!-- Delay before starting Gazebo -->
