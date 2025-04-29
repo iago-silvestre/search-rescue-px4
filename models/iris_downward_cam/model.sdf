@@ -56,7 +56,7 @@
     </link>
     
     <joint name="camera_joint" type="fixed">
-      <parent>iris::base_link</parent>
+      <parent>iris0::base_link</parent>
       <child>downward_camera_link</child>
     </joint>
   </model>

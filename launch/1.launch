@@ -36,6 +36,9 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
+        <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
+        <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
+              args="-sdf -file $(arg model) -model uav$(arg ID) -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"/>
         <!-- MAVROS -->
         <include file="$(find mavros)/launch/px4.launch">
             <arg name="fcu_url" value="$(arg fcu_url)"/>
