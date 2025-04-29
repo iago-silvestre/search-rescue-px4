@@ -42,12 +42,8 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
-        
-        <!-- 2. Wait for model to fully spawn -->
-        <node name="wait_for_iris" pkg="rosservice" type="rosservice" 
-            args="call --wait /gazebo/get_model_state '{model_name: iris0}'"
-            output="log"/>
-        
+
+     
         <!-- 3. Attach your custom camera model (FIXED VERSION) -->
         <node name="spawn_camera_uav0" pkg="gazebo_ros" type="spawn_model" 
             output="screen"
@@ -56,12 +52,14 @@
                     -model uav0_camera 
                     -x 0 -y 0 -z -0.1 
                     -R 0 -P 0 -Y 0 
-                    -reference_frame iris0::base_link"/>
+                    -reference_frame iris0::base_link"
+                    launch-prefix="bash -c 'sleep 5; $0 $@'"/>
         
         <!-- 4. Verify camera topics -->
         <node name="list_camera_topics" pkg="rostopic" type="rostopic"
             args="list | grep camera"
-            output="screen"/>
+            output="screen"
+            launch-prefix="bash -c 'sleep 6; $0 $@'"/>
 
         <!-- Attach the camera to the drone -->
         <!--node name="attach_camera" pkg="search-rescue-px4" type="attach_camera.sh" output="screen"
