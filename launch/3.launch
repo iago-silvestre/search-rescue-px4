@@ -5,6 +5,8 @@
     <!-- vehicle model and world -->
     <arg name="est" default="ekf2"/>
     <arg name="vehicle" default="iris"/>
+    <!-- Use the modified iris model with camera -->
+    <arg name="sdf" default="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
     <arg name="world" default="$(find search-rescue-px4)/worlds/rescue.world"/>
     <!-- gazebo configs -->
     <arg name="gui" default="true"/>
@@ -35,6 +37,8 @@
             <arg name="gst_udp_port" value="$(eval 5600 + arg('ID'))"/>
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
+            <!-- Use the modified SDF model -->
+            <arg name="sdf" value="$(arg sdf)"/>
         </include>
         <!-- MAVROS -->
         <include file="$(find mavros)/launch/px4.launch">
@@ -44,14 +48,10 @@
             <arg name="tgt_component" value="1"/>
         </include>
         
-        
-        <!--node name="attach_camera" pkg="gazebo_ros" type="spawn_model"
-      args="-sdf -file $(find px4)/Tools/simulation/gazebo-classic/sitl_gazebo-classic/models/c920/c920.sdf -model downward_cam
-            -x 0 -y 0 -z -0.1
-            -R 0 -P 1.5708 -Y 0
-            -reference_frame iris0::base_link
-            -robot_namespace iris0"
-            launch-prefix="bash -c 'sleep 5; $0 $@'"/-->
+        <!-- Camera image processing (optional) -->
+        <node pkg="image_view" type="image_view" name="image_view" output="screen">
+            <remap from="image" to="/uav0/camera/image_raw"/>
+        </node>
     </group>
 
     <!-- Delay before starting Gazebo -->
