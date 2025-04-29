@@ -130,6 +130,8 @@
             <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
             <arg name="tgt_component" value="1"/>
         </include>
+        <!-- rosbridge -->
+        <node name="rosbridge_websocket" pkg="rosbridge_server" type="rosbridge_websocket" output="screen" />
         <!-- boustrophedon_planner_server -->
         <node pkg="boustrophedon_server" type="boustrophedon_planner_server" name="boustrophedon_server">
             <param name="repeat_boundary" value="false"/>
