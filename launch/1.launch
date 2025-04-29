@@ -31,15 +31,15 @@
             <arg name="R" value="0"/>
             <arg name="P" value="0"/>
             <arg name="Y" value="0"/>
-            <arg name="vehicle" value="$(arg vehicle)"/>
+            <arg name="vehicle" value="$(arg vehicle)" unless="$(arg add_downward_camera)"/>
+            <!-- Use custom model when camera is enabled -->
+            <arg name="vehicle" value="iris_downward_cam" if="$(arg add_downward_camera)"/>
             <arg name="mavlink_udp_port" value="14560"/>
             <arg name="mavlink_tcp_port" value="4560"/>
             <arg name="ID" value="$(arg ID)"/>
             <arg name="gst_udp_port" value="$(eval 5600 + arg('ID'))"/>
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
-            <!-- Add camera sensor -->
-            <arg name="sdf" value="$(find search-rescue-px4)/models/iris_downward_cam/iris_downward_cam.sdf" if="$(arg add_downward_camera)"/>
         </include>
         <!-- MAVROS -->
         <include file="$(find mavros)/launch/px4.launch">
