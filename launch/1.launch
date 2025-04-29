@@ -50,6 +50,13 @@
             <arg name="tgt_system" value="$(eval 1 + arg('ID'))"/>
             <arg name="tgt_component" value="1"/>
         </include>
+        <arg name="drone_model" default="iris0"/>
+        <arg name="drone_link" default="base_link"/>
+        <arg name="camera_model" default="cam0"/>
+        <arg name="camera_link" default="camera_link"/>
+
+        <node pkg="your_package" type="attach_camera.sh" name="attach_camera_node" output="screen" launch-prefix="bash" args="$(arg drone_model) $(arg drone_link) $(arg camera_model) $(arg camera_link)"/>
+
         
         
         <!--node name="attach_camera" pkg="gazebo_ros" type="spawn_model"
