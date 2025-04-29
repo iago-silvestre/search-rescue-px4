@@ -48,8 +48,9 @@
             args="-sdf -file $(find search-rescue-px4)/config/camera.sdf -model downward_cam
                     -x 0 -y 0 -z -0.1
                     -R 0 -P 1.5708 -Y 0
-                    -reference_frame iris::base_link"
-            output="screen"/>
+                    -reference_frame iris0::base_link"
+            output="screen"
+            launch-prefix="bash -c 'sleep 5; $0 $@'"/>
     </group>
 
     <!-- Delay before starting Gazebo -->
