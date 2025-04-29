@@ -10,7 +10,7 @@
     <arg name="gui" default="true"/>
     <arg name="debug" default="false"/>
     <arg name="verbose" default="false"/>
-    <arg name="paused" default="false"/>
+    <arg name="paused" default="true"/>
     <gazebo>
         <plugin name="link_attacher_plugin" filename="libgazebo_ros_link_attacher.so"/>
     </gazebo>
@@ -81,7 +81,7 @@
         </include>
         <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
         <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
-              args="-sdf -file $(arg model) -model cam$(arg ID) -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"
+              args="-sdf -file $(arg model) -model cam$(arg ID) -x 5 -y 0 -z 0 -R 0 -P 0 -Y 0"
               launch-prefix="bash -c 'sleep 5; $0 $@'"/>
         <node name="attach_camera" pkg="search-rescue-px4" type="cam1.sh" output="screen"
             launch-prefix="bash -c 'exec $0'"/>
@@ -116,7 +116,7 @@
         </include>
         <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
         <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
-              args="-sdf -file $(arg model) -model cam$(arg ID) -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"
+              args="-sdf -file $(arg model) -model cam$(arg ID) -x -5 -y 0 -z 0 -R 0 -P 0 -Y 0"
               launch-prefix="bash -c 'sleep 5; $0 $@'"/>
         <node name="attach_camera" pkg="search-rescue-px4" type="cam2.sh" output="screen"
             launch-prefix="bash -c 'exec $0'"/>
