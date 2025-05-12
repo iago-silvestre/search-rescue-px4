@@ -79,4 +79,7 @@ ENV DISPLAY=:0
 
 # Set working directory and source environment at container startup
 WORKDIR /root/catkin_ws/src/search-rescue-px4
-ENTRYPOINT ["/bin/bash", "-c", "git pull && find /root/catkin_ws/src/search-rescue-px4/scripts -type f -name "*.sh" -exec chmod +x {} + && source ~/.bashrc && exec bash"]
+# Copy your custom entrypoint script into the container
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
