@@ -65,7 +65,7 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     #echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
     echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
 
-RUN find /root/catkin_ws/src/search-rescue-px4/scripts -type f -name "*.sh" -exec chmod +x {} +
+#RUN find /root/catkin_ws/src/search-rescue-px4/scripts -type f -name "*.sh" -exec chmod +x {} +
 
 # Clone and setup PX4-Autopilot
 RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git /root/PX4-Autopilot && \
@@ -79,4 +79,4 @@ ENV DISPLAY=:0
 
 # Set working directory and source environment at container startup
 WORKDIR /root/catkin_ws/src/search-rescue-px4
-ENTRYPOINT ["/bin/bash", "-c", "git pull && source ~/.bashrc && exec bash"]
+ENTRYPOINT ["/bin/bash", "-c", "git pull && find /root/catkin_ws/src/search-rescue-px4/scripts -type f -name "*.sh" -exec chmod +x {} + && source ~/.bashrc && exec bash"]
