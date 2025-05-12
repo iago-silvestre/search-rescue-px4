@@ -46,9 +46,12 @@ RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
 
 # Install Jason BDI
 WORKDIR /root
-RUN git clone https://github.com/jason-lang/jason.git ~/jason && \
-    cd ~/jason && \
-    ./gradlew config
+#RUN git clone https://github.com/jason-lang/jason.git ~/jason && \
+#    cd ~/jason && \
+#    ./gradlew config
+RUN echo "deb [trusted=yes] http://packages.chon.group/ chonos main" | sudo tee /etc/apt/sources.list.d/chonos.list && \
+    apt update && \
+    apt install jason-cli
 
 # Update bashrc with required environment variables
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
@@ -58,8 +61,8 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/simulation/gazebo-classic/sitl_gazebo-classic" >> ~/.bashrc && \
     echo "export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
-    echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
-    echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
+    #echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
+    #echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
     echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
 
 RUN find /root/catkin_ws/src/search-rescue-px4/scripts -type f -name "*.sh" -exec chmod +x {} +
