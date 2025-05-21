@@ -93,12 +93,9 @@ source ~/.bashrc
 Clone the **Jason BDI** repository and build it:
 
 ```bash
-git clone https://github.com/jason-lang/jason.git ~/jason
-cd ~/jason
-./gradlew config
-echo "export JASON_HOME=~/jason" >> ~/.bashrc
-echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc
-source ~/.bashrc
+echo "deb [trusted=yes] http://packages.chon.group/ chonos main" | sudo tee /etc/apt/sources.list.d/chonos.list
+sudo apt update
+sudo apt install jason-cli
 ```
 
 ### **7. Set Up Catkin Workspace**
