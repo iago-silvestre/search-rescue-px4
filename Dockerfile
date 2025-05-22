@@ -27,6 +27,7 @@ RUN apt-get update && apt-get install -y \
     libcgal-dev \
     openjdk-21-jdk \
     x11-xserver-utils \
+	ros-noetic-rqt-console \
     && rm -rf /var/lib/apt/lists/*
 
 # Install GeographicLib datasets for MAVROS
