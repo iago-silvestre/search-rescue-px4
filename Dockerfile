@@ -42,7 +42,7 @@ RUN apt-get update && apt-get install -y \
     ros-noetic-rqt-console \
     && rm -rf /var/lib/apt/lists/*
 
-# Install GeographicLib datasets for MAVROS
+# Install GeographicLib datasets for MAVROs
 RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh \
     && chmod +x install_geographiclib_datasets.sh \
     && ./install_geographiclib_datasets.sh
