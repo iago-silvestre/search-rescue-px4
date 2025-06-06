@@ -131,16 +131,17 @@ These variables are sourced automatically when you start a new shell.
 
 ---
 ## **Installation Setup (With Docker)**
-Alternatively, you can run this setup using Docker. For [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) it is recommended to have [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) installed.
-1. **Clone the repository**:
+You can run this setup using Docker. For [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) it is recommended to have [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) installed.
+1. **Clone the docker image**:
    ```bash
-   git clone https://github.com/iago-silvestre/search-rescue-px4.git
-   cd search-rescue-px4
+   docker pull iagosilvestre/search-rescue-px4
    ```
+This command pulls the prebuilt Docker image for this project and stores it in Docker’s virtual disk. This process may take a while.
 
-2. **Build the Docker image**:
+Alternatively, you can build the Docker image yourself. This is usually not recommended, because Dockerfiles involving GUI applications can sometimes have compatibility issues depending on your host machine’s kernel.
+ **Build the Docker image**:
    ```bash
-   docker build -t px4_jason .
+   docker build -t search-rescue-px4 .
    ```
 ---
 
