@@ -141,7 +141,7 @@ This command pulls the prebuilt Docker image for this project and stores it in D
 Alternatively, you can build the Docker image yourself. This is usually not recommended, because Dockerfiles involving GUI applications can sometimes have compatibility issues depending on your host machine’s kernel.
  **Build the Docker image**:
    ```bash
-   docker build -t search-rescue-px4 .
+   docker build -t iagosilvestre/search-rescue-px4 .
    ```
 ---
 
@@ -157,7 +157,7 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
 
 3. **Run the container**:
    ```bash
-   docker run -it --rm --env DISPLAY=host.docker.internal:0 --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host search-rescue-px4
+   docker run -it --rm --env DISPLAY=host.docker.internal:0 --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host iagosilvestre/search-rescue-px4
    ```
 
    You could add another volume if you're working on agents source code on your host machine, just add the following in the docker run command mentioned above:
@@ -175,7 +175,7 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
 
 2. **Run the container**:
    ```bash
-   docker run -it --rm --env DISPLAY=$DISPLAY --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host search-rescue-px4
+   docker run -it --rm --env DISPLAY=$DISPLAY --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host iagosilvestre/search-rescue-px4
    ```
    You could add another volume if you're working on agents source code on your host machine, just add the following in the docker run command mentioned above:
    ```bash
