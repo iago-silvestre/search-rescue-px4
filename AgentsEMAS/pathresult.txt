@@ -1,0 +1,5 @@
+result(header(seq(4),stamp(secs(460),nsecs(644000000)),frame_id("")),status(goal_id(stamp(secs(460),
+nsecs(644000000)),id("/boustrophedon_server-5-460.644000000")),status(3),text("")),result(plan(header(seq(0),
+stamp(secs(460),nsecs(644000000)),frame_id("")),points([point(x(0),y(3.1),z(0)),type(1),point(x(7.674999999971814),
+y(3.1000000000375816),z(0)),type(2),point(x(9.099999999966581),y(1.2000000000445592),z(0)),type(1),
+point(x(8.077935669463161E-28),y(1.2000000000000002),z(0)),type(2)]))))[device(sample_roscore),source(percept)]
