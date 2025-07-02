@@ -17,7 +17,7 @@
           beliefName: state
         - topicName: plan_path/result
           topicType: boustrophedon_msgs/PlanMowingPathActionResult
-          beliefName: result
+          beliefName: path_result
         - topicName: mock_camera/victim_detection
           topicType: geometry_msgs/PoseStamped
   actions:       

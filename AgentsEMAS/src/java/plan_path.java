@@ -5,6 +5,7 @@ import jason.asSemantics.DefaultInternalAction;
 import jason.asSemantics.TransitionSystem;
 import jason.asSemantics.Unifier;
 import jason.asSyntax.ListTermImpl;
+import jason.asSyntax.NumberTermImpl;
 import jason.asSyntax.Term;
 import static jason.asSyntax.ASSyntax.createAtom;
 
