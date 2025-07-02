@@ -10,9 +10,9 @@
           topicType: geometry_msgs/PoseStamped
         - topicName: /gazebo/model_states
           topicType: gazebo_msgs/ModelStates
-        - topicName: uav2/mavros/local_position/pose
-          topicType: geometry_msgs/PoseStamped
-          beliefName: local_pos
+        - topicName: uav2/mavros/local_position/odom
+          topicType: nav_msgs/Odometry
+          beliefName: odom
         - topicName: uav2/mavros/state
           topicType: State
           beliefName: state

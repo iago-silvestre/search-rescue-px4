@@ -1,6 +1,7 @@
 /* Initial beliefs and rules */
 flight_altitude(2).
 setpoint_goal(0, 0, 0).
+local_pos(X1,Y1,Z1,X2,Y2,Z2,W2) :- my_frame_id(Frame_id) & odom(header(seq(Seq),stamp(secs(Secs),nsecs(Nsecs)),frame_id(Frame_id)),child_frame_id(CFI),pose(pose(position(x(X1),y(Y1),z(Z1)),orientation(x(X2),y((Y2)),z((Z2)),w((W2)))),covariance(CV)),twist(twist(linear(x(LX),y(LY),z((LZ))),angular(x(AX),y((AY)),z((AZ)))),covariance(CV2))).
 
 /* Initial goals */
 !getGazeboOffset.
@@ -83,19 +84,19 @@ setpoint_goal(0, 0, 0).
         -victim_in_rescue(N, _, _);
 		!resume_negotiation.
 
-+!publishSetPoint : state("OFFBOARD",_,"True")
-	<-	?setpoint_goal(X,Y,Z);
-        setpoint_local(X,Y,Z);
-        .wait(200);
-        !publishSetPoint.
++!publishSetPoint  : state(_, _, _, _, _, mode("OFFBOARD"), _)
+   <- ?setpoint_goal(X, Y, Z);
+      .setpoint_local([0.0,0.0,'map'], [[X, Y, Z], [0.0, 0.0, 0.0, 1.0]]);
+      .wait(500);
+      !publishSetPoint.
 
-+!publishSetPoint : not state("OFFBOARD",_,"True")
-	<-	arm_motors(True);
-        set_mode("OFFBOARD");
-        ?setpoint_goal(X,Y,Z);
-        setpoint_local(X,Y,Z);
-        .wait(200);
-        !publishSetPoint.
++!publishSetPoint : not state(_, _, _, _, _, mode("OFFBOARD"), _)
+   <- .arming(true);
+      ?setpoint_goal(X, Y, Z);
+      .set_mode("OFFBOARD");
+      .setpoint_local([0.0,0.0,'map'], [[X, Y, Z], [0.0, 0.0, 0.0, 1.0]]);
+      .wait(500);
+      !publishSetPoint.
 
 +!publishSetPoint <- !publishSetPoint.
 
@@ -114,7 +115,7 @@ setpoint_goal(0, 0, 0).
   <-  ?flight_altitude(Z);
       !getGazeboPos;
       ?gazebo_pos(GX, GY, GZ);
-      drop_buoy(GX, GY, GZ-0.25);
+      .drop_buoy(GX, GY, GZ-0.25);
       .print("Droping buoy to victim ", N);
       .broadcast(tell, victim_rescued(N));
       !returnHome.

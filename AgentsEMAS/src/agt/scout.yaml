@@ -6,9 +6,6 @@
       className: DefaultRos4EmbeddedMas  
       connectionString: ws://localhost:9090    
   perceptionTopics:     
-        - topicName: uav0/mavros/local_position/pose
-          topicType: geometry_msgs/PoseStamped
-          beliefName: local_pos
         - topicName: uav0/mavros/local_position/odom
           topicType: nav_msgs/Odometry
           beliefName: odom
@@ -17,7 +14,7 @@
           beliefName: state
         - topicName: plan_path/result
           topicType: boustrophedon_msgs/PlanMowingPathActionResult
-          beliefName: path_result
+          beliefName: plan_path_result
         - topicName: mock_camera/victim_detection
           topicType: geometry_msgs/PoseStamped
   actions:       
